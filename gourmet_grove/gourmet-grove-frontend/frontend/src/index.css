@@ -1,0 +1,50 @@
+#cta {
+  background: rgba(0, 0, 0, 0) url(/public/img/index.jpg) no-repeat scroll top center ;
+  position: relative;
+  background-size: 120%;
+}
+.jumbotron {
+  padding-top: 1rem;
+  padding-bottom: 6.5rem;
+  margin-bottom: 200px;
+  background-color: #fff;
+}
+body,p{
+  font-weight: 300;
+  font-family: 'Montserrat', serif;
+  font-size: 15px;
+  line-height: 26px;
+  color: black !important;
+}
+.jumbotron p {
+  padding: 2rem 0 2rem;
+  margin: 0;
+  line-height: 31px;
+  font-size: 16px;
+  color: black !important;
+}
+.btn {
+  border: 0 none;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background-color: #111111;
+  border-radius: 0;
+  padding: 0.8rem 2rem;
+  line-height: 1.25;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  transition: all 0.2s ease-in-out;
+}
+.btn-primary {
+  color: #fff;
+  /* background-color: #0275d8;
+  border-color: #0275d8; */
+}
+.btn-primary:hover {
+  background-color: red; /* Change to your desired red color */
+
+}

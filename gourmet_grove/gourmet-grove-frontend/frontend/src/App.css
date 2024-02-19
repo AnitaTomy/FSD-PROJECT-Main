@@ -1,0 +1,351 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  color: black !important; /* Set the default text color */
+}
+
+p {
+  color: inherit; /* Inherit the text color from the parent */
+}
+
+
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  color: black;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #8B0000;
+  color: white;
+  font-family: 'Cedarville Cursive', cursive;
+}
+
+.header-text {
+  text-align: center;
+  margin-top: 10px;
+  white-space: pre-line;
+  font-size: 20px;
+}
+
+
+
+.nav ul {
+  list-style: none;
+  display: flex;
+}
+
+.nav ul li {
+  margin: 0 15px;
+  cursor: pointer;
+}
+
+.main-content {
+  padding: 20px;
+  text-align: center;
+  color: black;
+}
+.logo-container {
+  display: flex;
+  align-items: center;
+}
+.logo-img {
+  margin-right: 10px; 
+}
+
+/* Add these styles to your existing CSS file or create a new one for the About component */
+
+.wrap {
+  margin: 0 auto;
+  max-width: 1170px;
+}
+.genesis-widget {
+  width: 100%;
+  max-width: 80%;
+  float: none;
+  margin: 10vh auto;
+  color: #000;
+}
+
+
+.images-container {
+  display: flex;
+  justify-content: space-between; /* Adjust as needed */
+  margin-top: 50px; /* Adjust as needed */
+}
+
+.course-images,
+.category-images {
+  display: flex;
+  align-items: center;
+}
+
+.course-image-container,
+.category-image-container {
+  margin: 0 10px; /* Adjust spacing between images */
+}
+
+.course-image,
+.category-image {
+  width: 100px; /* Adjust image width as needed */
+  height: 100px; /* Adjust image height as needed */
+  border-radius: 8px; /* Optional: Add border-radius for rounded corners */
+  cursor: pointer;
+}
+
+.course-title,
+.category-title {
+  margin-top: 5px; /* Adjust spacing between image and title */
+  text-align: center;
+  font-size: 14px; /* Adjust font size as needed */
+  color: #333; /* Adjust text color as needed */
+}
+
+/* Add this CSS to your existing App.css or create a new CSS file */
+
+.footer {
+  background-color: #8B0000;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+
+
+.recipe-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+
+
+.recipe-image {
+  width: 10cm;
+  height: 10cm;
+  border-radius: 8px;
+  margin-top: 100px;
+}
+.recipe-title {
+  text-align: center; 
+  margin-top: 20px; 
+  font-size: 32px; 
+  font-weight: bold;
+}
+
+.rating-comment-box {
+  max-width: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+.rating-stars {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.star {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.recipe-card {
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.recipe-card:hover {
+  transform: scale(1.1); /* Adjust the scale factor based on your preference */
+}
+.combined-images {
+  display: flex;
+}
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.combined-image-container:hover .overlay {
+  opacity: 1;
+}
+
+
+
+
+.combined-image-container {
+  position: relative;
+  overflow: hidden;
+  margin: 55px; /* Adjust the margin as needed */
+  border-radius: 50%; /* Make it a circle */
+  width: 120px; /* Set a fixed width for the circle */
+  height: 120px; /* Set a fixed height for the circle */
+  cursor: pointer; /* Add this line to change cursor to pointer */
+}
+
+.overlay h5 {
+  color: #fff;
+  margin: 0;
+}
+
+.combined-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Maintain aspect ratio and cover the circle */
+  border-radius: 50%; /* Make it a circle */
+}
+
+.btn-view-more {
+  background-color: #8B0000;
+  border-color: #8B0000;
+}
+
+.btn-view-more:hover {
+  background-color: #111111; /* Change color on hover if desired */
+  border-color: #111111;
+}
+.star {
+  color: gold; /* Filled star color */
+  font-size: 24px; /* Adjust the font size as needed */
+}
+
+.filled {
+  color: gold; /* Filled star color */
+}
+
+.half {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  color: transparent; /* Hide the filled part */
+}
+
+.half:before {
+  content: '\2605'; /* Unicode character for a filled star */
+  position: absolute;
+  left: 0;
+  color: gold; /* Filled star color */
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+#scrollUp {
+  bottom: -1150px; /* Adjusted the bottom value */
+  font-size: 14px;
+  right: 50%;
+  width: 30px;
+  background-color: #8B0000;
+  color: #fff;
+  text-align: center;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+  margin-top: 10px;
+  position: fixed;
+}
+
+/* Additional styles to improve visibility */
+#scrollUp:hover {
+  background-color: #111111;
+  cursor: pointer;
+}
+
+.centered-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.center-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.rating-comment-box {
+  text-align: center;
+  padding: 20px;
+  max-width: 400px; /* Adjust the max-width as needed */
+}
+
+.rating-stars {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.star {
+  margin: 0 2px;
+  cursor: pointer;
+}
+/* Add these styles for the review box */
+.review-box {
+  margin-top: 20px;
+}
+
+.review-item {
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.review-header {
+  margin-bottom: 10px;
+}
+
+.review-author {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.rating-stars {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.star {
+  margin-right: 5px;
+}
+
+.review-comment {
+  font-size: 14px;
+}
+
+
+

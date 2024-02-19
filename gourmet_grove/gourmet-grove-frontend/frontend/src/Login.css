@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-size: cover;
+  /* color: #fff; */
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-page {
+  /* background: rgba(0, 0, 0, 0.7); */
+  width: 100%;
+}
+
+.login-wrapper {
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+}
+
+.login-form {
+  background-color: rgba(21, 21, 21, 0.8); /* Semi-transparent white background for the login box */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+}
+/* Login.css */
+.login-form {
+  border: 2px solid #8B0000; /* Red border color */
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px; /* Optional: Add border radius for rounded corners */
+}
+
+/* Add additional styling as needed */
+
+
+h2 {
+  text-align: center;
+  color: #a40f0f;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 10px;
+  color: #8B0000;
+}
+
+input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #cb1111;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: rgba(0, 0, 0, 0.482) !important; /* Change to black on hover */
+}

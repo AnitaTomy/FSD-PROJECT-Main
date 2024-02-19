@@ -1,0 +1,90 @@
+/* Userdash.css */
+
+/* Headeruserdash styles */
+/* .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f8f8f8;
+  padding: 10px;
+} */
+
+/* .logo-container {
+  display: flex;
+  align-items: center;
+} */
+
+.logo-img {
+  height: 50px; /* Adjust the height based on your design */
+  width: auto;
+  margin-right: 10px;
+}
+
+h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.user-dropdown {
+  position: relative;
+}
+
+.user-icon {
+  cursor: pointer;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1;
+}
+
+
+/* Userdash.css */
+
+.sidebar {
+  width: 150px;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.sidebar.open nav ul li {
+  opacity: 1;
+}
+
+.menu-icon {
+  cursor: pointer;
+}
+
+/* nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+} */
+
+/* nav li {
+  margin-bottom: 10px;
+  opacity: 0;
+  transition: opacity 0.5s;
+} */
+
+/* Show the menu items when the .open class is present */
+.sidebar.open li {
+  opacity: 1;
+}
+
+.userdash {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  text-align: center;
+  padding: 20px;
+}

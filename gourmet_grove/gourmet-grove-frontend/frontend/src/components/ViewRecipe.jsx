@@ -9,7 +9,7 @@ const ViewRecipe = () => {
   const [hoverRating, setHoverRating] = useState(0);
   const [comment, setComment] = useState('');
   const [reviews, setReviews] = useState([]);
-  const [authorName, setAuthorName] = useState(''); 
+  const [authorName, setAuthorName] = useState('');
   
 
   const handleAuthorNameChange = (event) => {
@@ -201,7 +201,7 @@ const ViewRecipe = () => {
           </ul>
         </nav>
       </header>
-      <div className="recipe-container">
+      <div className="recipe-container" style={{ backgroundColor: 'white' }}>
         <div className="recipe-details">
           <h2 className="recipe-title" style={{ color: "black", display: 'flex', alignItems: 'center', marginTop: '20px' }}>
             {recipe.title}
@@ -209,7 +209,15 @@ const ViewRecipe = () => {
               {renderStars(calculateRecipeAverageRating())}
             </div>
           </h2>
-          <h4 style={{ color: "black" ,marginLeft:"15px"}}>{recipe.description}</h4>
+          <h4 style={{ color: "black" }}>{recipe.description}</h4>
+          {/* <div className="recipe-image-container">
+          <img
+            src={recipe.image}
+            className="recipe-image"
+            alt={recipe.title}
+            marginLeft={"500px"}
+          />
+        </div> */}
 
 
           <div className="description-ingredients-steps" style={{ display: 'flex', marginLeft: '20px' }}>
@@ -234,7 +242,29 @@ const ViewRecipe = () => {
   </div>
           </div>
 
-          <div className="rating-comment-box" style={{ marginTop: '20px' }}>
+      
+
+
+      <div className="reviews-box" style={{ marginTop: '20px' }}>
+  <h3>Reviews:</h3>
+  {reviews.map((review) => (
+    <div key={review._id} className="review-item">
+      <div className="review-header">
+        <h6 className="review-author">Author: {review.author}</h6>
+      </div>
+      <div className="review-rating">
+        <span className="rating-stars">
+          {renderStars(review.rating)}
+        </span>
+      </div>
+      <div className="review-comment">
+        <h6>Comment:</h6>
+        <h6>{review.comment}</h6>
+      </div>
+    </div>
+  ))}
+</div>
+<div className="rating-comment-box" style={{ marginTop: '20px',marginLeft:'500px' }}>
         <h3>Rate and Comment:</h3>
         <br />
         <h6>My team and I love hearing from you! Submit your recipe review here.</h6>
@@ -278,39 +308,11 @@ const ViewRecipe = () => {
           <button type="submit">Submit</button>
         </form>
       </div>
-      
-
-
-      <div className="reviews-box" style={{ marginTop: '20px' }}>
-  <h3>Reviews:</h3>
-  {reviews.map((review) => (
-    <div key={review._id} className="review-item">
-      <div className="review-header">
-        <h6 className="review-author">Author: {review.author}</h6>
-      </div>
-      <div className="review-rating">
-        <span className="rating-stars">
-          {renderStars(review.rating)}
-        </span>
-      </div>
-      <div className="review-comment">
-        <h6>Comment:</h6>
-        <h6>{review.comment}</h6>
-      </div>
-    </div>
-  ))}
-</div>
 
 
         </div>
 
-        <div className="recipe-image-container">
-          <img
-            src={recipe.image}
-            className="recipe-image"
-            alt={recipe.title}
-          />
-        </div>
+        
       </div>
     </div>
   );

@@ -28,6 +28,15 @@ router.post('/login', async (req, res) => {
     }
 });
 
+// API to check if the user has an active session
+router.get('/checksession', (req, res) => {
+    if (req.session && req.session.user) {
+        res.json({ success: true, username: req.session.user.username });
+    } else {
+        res.json({ success: false });
+    }
+});
+
 
 // API FOR SIGNUP ROUTER
 router.post('/signup', async (req, res) => {

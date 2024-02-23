@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import '../App.css';
 
+
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -224,6 +225,7 @@ const Home = () => {
     </div>
   ))}
 </div>
+
 
 <div className="row">
         {filteredRecipes.length > 0 ? (

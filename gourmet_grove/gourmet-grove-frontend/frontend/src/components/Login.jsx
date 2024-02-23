@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../Login.css';
 
@@ -6,6 +6,28 @@ const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const checkSession = async () => {
+            try {
+                const response = await fetch('http://localhost:3000/api/auth/checksession', {
+                    method: 'GET',
+                    credentials: 'include',
+                });
+
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    // User is already logged in, redirect to the dashboard
+                    navigate(`/userdash/${data.username}`);
+                }
+            } catch (error) {
+                console.error('Error checking session:', error);
+            }
+        };
+
+        checkSession();
+    }, [navigate]);
 
     const handleLogin = async () => {
         try {

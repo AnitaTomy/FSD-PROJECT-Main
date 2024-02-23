@@ -1,7 +1,7 @@
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-  color: black !important; /* Set the default text color */
+  /* color: black !important; */
 }
 
 p {
@@ -14,8 +14,8 @@ p {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
-  color: black;
+  background-color: #f8f8f8; /* Light gray background */
+  color: #333;
 }
 
 .header {
@@ -124,46 +124,60 @@ p {
 
 
 
+/* Improve recipe container layout */
 .recipe-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 20px;
+  background-color: #fff; /* White background */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
   margin-top: 20px;
 }
 
 
 
 .recipe-image {
-  width: 10cm;
-  height: 10cm;
+  width: 5cm;
+  height: 5cm;
   border-radius: 8px;
   margin-top: 100px;
+  margin-left: 1000px;
 }
+
 .recipe-title {
-  text-align: center; 
-  margin-top: 20px; 
-  font-size: 32px; 
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 500px;
+  font-size: 32px;
   font-weight: bold;
 }
 
+
+/* Improve rating and comment box layout */
 .rating-comment-box {
   max-width: 400px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
   margin-top: 20px;
+  text-align: center;
 }
 
 .rating-stars {
   display: flex;
   justify-content: center;
-  margin-bottom: 10px;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .star {
   margin: 0 5px;
   cursor: pointer;
+  color: #ffc107; /* Star color */
+  font-size: 24px;
 }
 
 .recipe-card {

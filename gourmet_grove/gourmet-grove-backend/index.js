@@ -2,6 +2,8 @@
 const express=require('express');
 const mongoose=require('mongoose');
 const cors=require('cors');
+const session = require('express-session');
+const cookieParser = require('cookie-parser'); 
 
 // Initialization
 const app=express();
@@ -25,6 +27,16 @@ const corsOptions = {
 
 // Middleware
 app.use(express.json());
+app.use(cookieParser());
+app.use(session({
+    secret: 'gg123',
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        secure: false,
+        maxAge: 1000 * 60 * 60 * 24,
+    },
+}));
 
 // Serve the react app as build
 app.use(express.static('build'));

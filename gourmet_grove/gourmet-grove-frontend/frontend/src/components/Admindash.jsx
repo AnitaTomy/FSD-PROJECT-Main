@@ -44,6 +44,31 @@ const Admindash = () => {
   };
 
   useEffect(() => {
+    // Fetch user details to get user names based on user ID
+    const fetchUserNames = async () => {
+      try {
+        const userResponse = await fetch('http://localhost:3000/api/auth/viewuser');
+        const userData = await userResponse.json();
+
+        if (userData.success) {
+          const names = {};
+          userData.users.forEach((user) => {
+            names[user._id] = user.username;
+          });
+          console.log("Names;",names);
+          setUserNames(names);
+        } else {
+          console.error('Error fetching user details');
+        }
+      } catch (error) {
+        console.error('Error fetching user details:', error);
+      }
+    };
+
+    fetchUserNames();
+  }, []);
+
+  useEffect(() => {
     const fetchStats = async () => {
       try {
         const userResponse = await fetch('http://localhost:3000/api/auth/view');
@@ -99,29 +124,7 @@ const Admindash = () => {
     }
   };
 
-  useEffect(() => {
-    // Fetch user details to get user names based on user ID
-    const fetchUserNames = async () => {
-      try {
-        const userResponse = await fetch('http://localhost:3000/api/auth/viewuser');
-        const userData = await userResponse.json();
-
-        if (userData.success) {
-          const names = {};
-          userData.users.forEach((user) => {
-            names[user._id] = user.username;
-          });
-          setUserNames(names);
-        } else {
-          console.error('Error fetching user details');
-        }
-      } catch (error) {
-        console.error('Error fetching user details:', error);
-      }
-    };
-
-    fetchUserNames();
-  }, []);
+  
 
 
   useEffect(() => {
@@ -203,7 +206,11 @@ const Admindash = () => {
 
       if (recipeData.success) {
         setRecipeDetails(
-          recipeData.recipes.map((recipe) => ({ ...recipe, id: recipe.id }))
+          recipeData.recipes.map((recipe) => ({ 
+            ...recipe, 
+            id: recipe.id ,
+            username: userNames[recipe.userId] || 'N/A', // Fetch username using userId
+          }))
         );
       } else {
         console.error('Error fetching recipe details');
@@ -282,6 +289,7 @@ const Admindash = () => {
       minHeight: '100vh', // Ensure the background covers the entire viewport height
     },
   };
+  
 
   return (
     
@@ -470,10 +478,9 @@ const Admindash = () => {
                 <strong>{recipe.title !== undefined ? recipe.title : 'N/A'}</strong>
               </TableCell>
               <TableCell sx={{ borderRight: '1px solid Darkred', color: 'white' }}>
-                <strong>{userNames[recipe.userId] || 'N/A'}</strong>
+                <strong>{recipe.username}</strong>
               </TableCell>
               <TableCell sx={{ borderRight: '1px solid Darkred', color: 'white' }}>
-                {/* Display image as an actual image based on the URL */}
                 {recipe.image && <img src={recipe.image} alt={`Recipe ${recipe.title} Image`} style={{ width: '100px', height: '100px', objectFit: 'cover' }} />}
               </TableCell>
               <TableCell>

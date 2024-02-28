@@ -29,7 +29,7 @@ function App() {
         <Route path='/addrecipe' element={<Addrecipe/>}/>
         <Route path='/recipe/:recipeId' element={<ViewRecipe/>}/>
         <Route path='/editrecipe/:id' element={<EditRecipe />} />
-        <Route path='/admindash' element={<Admindash/>}/>
+        <Route path='/admindash/:userId' element={<Admindash/>}/>
         <Route path='/forgetpassword' element={<ForgetPassword/>}/>
         <Route path='/edituser/:userId' element={<EditUser/>}/>
       </Routes>

@@ -10,15 +10,16 @@ const User=require('../models/user')
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
-        if (username === 'Admin' && password === 'admin@12345') {
-            res.json({ success: true, message: 'Welcome Admin' });
-            return; 
-        }
-        const user = await User.findOne({ username });
-        // Check if the user exists and the password is correct
-        if (user && user.password === password) {
-            res.json({ success: true, userId: user._id, username: user.username, message: 'Welcome User' })
 
+        if (username === 'Admin' && password === 'admin@12345') {
+            res.json({ success: true, message: 'Welcome Admin', userId: '658c1fa86e8cc04ac4ba3f06' });
+            return;
+        }
+
+        const user = await User.findOne({ username });
+
+        if (user && user.password === password) {
+            res.json({ success: true, userId: user._id, username: user.username, message: 'Welcome User' });
         } else {
             res.status(401).json({ success: false, message: 'Invalid credentials' });
         }
@@ -27,6 +28,7 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ success: false, message: 'Internal server error' });
     }
 });
+
 
 // API to check if the user has an active session
 router.get('/checksession', (req, res) => {

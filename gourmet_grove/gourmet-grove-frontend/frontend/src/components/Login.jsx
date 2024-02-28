@@ -38,19 +38,21 @@ const Login = () => {
                 },
                 body: JSON.stringify({ username, password }),
             });
-
+    
             const data = await response.json();
-
+    
             if (response.ok) {
                 console.log('Login successful:', data.message);
-
+    
                 // Check if the user is an admin
                 if (username === 'Admin' && password === 'admin@12345') {
                     localStorage.setItem('userId', data.userId);
-                    navigate('/admindash');
+                    console.log('Admin userId:', data.userId);
+                    navigate(`/admindash/${data.userId}`);
                 } else {
-                    // Redirect to the user dashboard
                     localStorage.setItem('userId', data.userId);
+                    console.log('User userId:', data.userId);
+    
                     navigate(`/userdash/${username}`);
                 }
             } else {
@@ -61,6 +63,8 @@ const Login = () => {
             console.error('Error during login:', error);
         }
     };
+    
+    
 
     return (
         <div className='login-page'>

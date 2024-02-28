@@ -1,6 +1,179 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FaStar } from 'react-icons/fa';
+import {
+  Typography,
+  Box,
+  Button,
+  TextField,
+  Rating,
+  Avatar,
+  Divider,
+  Paper,
+} from '@mui/material';
+import { styled } from '@mui/system';
+
+// CSS Styles
+const StyledHeader = styled('header')({
+  background: 'darkred',
+  color: 'white',
+  padding: '10px 20px',
+  display: 'flex',
+  justifyContent: 'space-between',
+  alignItems: 'center',
+});
+
+const StyledLogoContainer = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+});
+
+const StyledLogo = styled('div')({
+  marginRight: '10px',
+});
+
+const StyledNav = styled('nav')({
+  ul: {
+    listStyle: 'none',
+    padding: 0,
+    display: 'flex',
+    li: {
+      marginLeft: '20px',
+      a: {
+        textDecoration: 'none',
+        color: 'white',
+        hover: {
+          textDecoration: 'underline',
+        },
+      },
+    },
+  },
+});
+
+const StyledRecipeContainer = styled('div')({
+  backgroundColor: 'white',
+  maxWidth: '800px',
+  margin: '20px auto',
+  padding: '20px',
+  borderRadius: '10px',
+  boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
+});
+
+const StyledRecipeDetails = styled('div')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+});
+
+const StyledRecipeTitle = styled('h2')({
+  color: 'black',
+  display: 'flex',
+  alignItems: 'center',
+  marginTop: '20px',
+});
+
+const StyledRatingStars = styled('div')({
+  marginLeft: '10px',
+});
+
+const StyledDescriptionIngredientsSteps = styled('div')({
+  display: 'flex',
+  marginLeft: '20px',
+});
+
+const StyledIngredientsBox = styled('div')({
+  flex: 1,
+  marginRight: '20px',
+});
+
+const StyledStepsBox = styled('div')({
+  flex: 1,
+});
+
+const StyledReviewsContainer = styled('div')({
+  marginTop: '20px',
+});
+
+const StyledReviewCard = styled(Paper)({
+  padding: '20px',
+  marginBottom: '20px',
+});
+
+const StyledReviewAuthor = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  marginBottom: '10px',
+});
+
+const StyledReviewAvatar = styled(Avatar)({
+  marginRight: '10px',
+});
+
+const StyledReviewContent = styled('div')({
+  marginLeft: '60px',
+});
+
+const StyledRating = styled(Rating)({
+  marginBottom: '10px',
+});
+
+const StyledReviewComment = styled('div')({
+  marginBottom: '10px',
+});
+
+const StyledRatingCommentContainer = styled('div')({
+  marginTop: '20px',
+});
+
+const StyledCommentPaper = styled(Paper)({
+  padding: '20px',
+});
+
+const StyledCommentForm = styled('form')({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+});
+
+const StyledRatingStarsInput = styled('div')({
+  display: 'flex',
+  marginBottom: '15px',
+  justifyContent: 'center',
+  label: {
+    cursor: 'pointer',
+    marginRight: '5px',
+    input: {
+      display: 'none',
+      '&:checked + .star': {
+        color: '#ffc107',
+      },
+    },
+  },
+  '.star': {
+    fontSize: '25px',
+    color: '#e4e5e9',
+  },
+});
+
+const StyledCommentTextArea = styled('textarea')({
+  width: '100%',
+  padding: '10px',
+  borderRadius: '8px',
+  border: '1px solid #ccc',
+  marginBottom: '15px',
+});
+
+const StyledSubmitButton = styled('button')({
+  padding: '10px 20px',
+  background: '#333',
+  color: 'white',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: 'pointer',
+  '&:hover': {
+    background: '#555',
+  },
+});
 
 const ViewRecipe = () => {
   const { recipeId } = useParams();
@@ -10,14 +183,12 @@ const ViewRecipe = () => {
   const [comment, setComment] = useState('');
   const [reviews, setReviews] = useState([]);
   const [authorName, setAuthorName] = useState('');
-  
 
   const handleAuthorNameChange = (event) => {
     setAuthorName(event.target.value);
   };
 
   useEffect(() => {
-    // Fetch recipe details based on recipeId
     const fetchRecipeDetails = async () => {
       try {
         const response = await fetch(`http://localhost:3000/api/recipe/getRecipeById/${recipeId}`);
@@ -27,24 +198,20 @@ const ViewRecipe = () => {
           setRecipe(data.recipe);
         } else {
           console.error('Error fetching recipe details:', data.message);
-          // Handle the case where recipe details are not available
           setRecipe(null);
         }
       } catch (error) {
         console.error('Error fetching recipe details:', error);
-        // Handle the case where an error occurred during fetching
         setRecipe(null);
       }
     };
 
-    // Call the fetchRecipeDetails function
     fetchRecipeDetails();
   }, [recipeId]);
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        // Fetch reviews specific to the current recipe
         const response = await fetch(`http://localhost:3000/api/review/getReviewsByRecipeId/${recipeId}`);
         const data = await response.json();
 
@@ -72,18 +239,15 @@ const ViewRecipe = () => {
   const handleCommentChange = (event) => {
     setComment(event.target.value);
   };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-  
 
-  
-    // Check if either rating or comment is provided
     if (rating === 0 && comment.trim() === '') {
-      // If neither is provided, show an alert and prevent submission
       alert('Please provide a rating or a comment.');
       return;
     }
-  
+
     try {
       const response = await fetch(`http://localhost:3000/api/review/addReview/${recipeId}`, {
         method: 'POST',
@@ -93,31 +257,23 @@ const ViewRecipe = () => {
         body: JSON.stringify({
           rating,
           comment,
-          author: authorName, // Include the authorName in the request payload
+          author: authorName,
         }),
       });
-  
+
       const data = await response.json();
-  
+
       if (data.success) {
-        console.log('Review added successfully:', data.review);
-        // Optionally, you can update the state or perform any other action after successful submission
-  
-        // Show a thank you alert
         alert('Thank you for your review!');
         window.location.reload();
       } else {
         console.error('Error adding review:', data.message);
-        // Handle the error case
       }
     } catch (error) {
       console.error('Error adding review:', error);
-      // Handle the error case
     }
   };
-  
 
-  // Function to calculate average rating for a specific recipe
   const calculateRecipeAverageRating = () => {
     const recipeReviews = reviews.filter((review) => review.recipeId === recipeId);
     if (recipeReviews.length === 0) return 0;
@@ -126,7 +282,6 @@ const ViewRecipe = () => {
     return totalRating / recipeReviews.length;
   };
 
-  // Function to render stars based on the average rating
   const renderStars = (averageRating) => {
     const maxStars = 5;
     const fullStars = Math.floor(averageRating);
@@ -135,17 +290,14 @@ const ViewRecipe = () => {
 
     const stars = [];
 
-    // Filled stars
     for (let i = 0; i < fullStars; i++) {
       stars.push(<span key={i} className="star filled">&#9733;</span>);
     }
 
-    // Half-filled star
     if (remainder > 0) {
       stars.push(<span key="half" className="star half">&#9733;</span>);
     }
 
-    // Outlined stars
     for (let i = 0; i < outlinedStars; i++) {
       stars.push(<span key={i + fullStars + (remainder > 0 ? 1 : 0)} className="star outlined">&#9734;</span>);
     }
@@ -154,7 +306,6 @@ const ViewRecipe = () => {
   };
 
   if (recipe === null) {
-    // Handle the case where the recipe is still loading or not available
     return <p>Loading recipe details...</p>;
   }
 
@@ -163,158 +314,150 @@ const ViewRecipe = () => {
   }
 
   return (
-    <div className='centered-container'>
-      <header className="header">
-        <div className="logo-container">
-          <div className="logo">
+    <Box>
+      <StyledHeader>
+        <StyledLogoContainer>
+          <StyledLogo>
             <img
               src="/img/166028664_padded_logo-removebg-preview.png"
               alt="Gourmet Grove"
-              className="logo-img"
               style={{ height: '70px', width: '70px' }}
             />
-          </div>
-          <h3 style={{ color: "white" }}>Gourmet Grove</h3>
-        </div>
-        <nav className="nav">
+          </StyledLogo>
+          <Typography variant="h5">Gourmet Grove</Typography>
+        </StyledLogoContainer>
+        <StyledNav>
           <ul>
             <li>
-              <Link style={{ textDecoration: "none", color: "white" }} to={'/'}>
-                Home
-              </Link>
+              <Link to={'/'}>Home</Link>
             </li>
             <li>
-              <Link style={{ textDecoration: "none", color: "white" }} to={'/about'}>
-                About
-              </Link>
+              <Link to={'/about'}>About</Link>
             </li>
             <li>
-              <Link style={{ textDecoration: "none", color: "white" }} to={'/login'}>
-                Login
-              </Link>
+              <Link to={'/login'}>Login</Link>
             </li>
             <li>
-              <Link style={{ textDecoration: "none", color: "white" }} to={'/signup'}>
-                Signup
-              </Link>
+              <Link to={'/signup'}>Signup</Link>
             </li>
           </ul>
-        </nav>
-      </header>
-      <div className="recipe-container" style={{ backgroundColor: 'white' }}>
-        <div className="recipe-details">
-          <h2 className="recipe-title" style={{ color: "black", display: 'flex', alignItems: 'center', marginTop: '20px' }}>
+        </StyledNav>
+      </StyledHeader>
+
+      <StyledRecipeContainer>
+        <StyledRecipeDetails>
+          <StyledRecipeTitle>
             {recipe.title}
-            <div className="rating-stars" style={{ marginLeft: '10px' }}>
-              {renderStars(calculateRecipeAverageRating())}
-            </div>
-          </h2>
-          <h4 style={{ color: "black" }}>{recipe.description}</h4>
-          {/* <div className="recipe-image-container">
+            <StyledRatingStars>{renderStars(calculateRecipeAverageRating())}</StyledRatingStars>
+          </StyledRecipeTitle>
+
           <img
             src={recipe.image}
-            className="recipe-image"
             alt={recipe.title}
-            marginLeft={"500px"}
+            style={{ width: '100%', borderRadius: '10px', marginBottom: '20px' }}
           />
-        </div> */}
 
+          <Typography variant="h6" color="black">
+            {recipe.description}
+          </Typography>
 
-          <div className="description-ingredients-steps" style={{ display: 'flex', marginLeft: '20px' }}>
-  <div className="ingredients-box" style={{ flex: 1, marginRight: '20px' }}>
-    <h3 style={{ color: "black" }}>Ingredients:</h3><br />
-    {recipe.ingredients.map((ingredient, index) => (
-      <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-        <input type="checkbox" style={{ marginRight: '5px' }} />
-        <span>{ingredient.trim()}</span>
-      </div>
-    ))}
-  </div>
+          <StyledDescriptionIngredientsSteps>
+            <StyledIngredientsBox>
+              <Typography variant="h6" color="black">
+                Ingredients:
+              </Typography>
+              {recipe.ingredients.map((ingredient, index) => (
+                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+                  <input type="checkbox" style={{ marginRight: '5px' }} />
+                  <span>{ingredient.trim()}</span>
+                </div>
+              ))}
+            </StyledIngredientsBox>
 
-  <div className="steps-box" style={{ flex: 1 }}>
-    <h3 style={{ color: "black" }}>Steps:</h3><br />
-    {recipe.steps.map((step, index) => (
-      <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-        <input type="checkbox" style={{ marginRight: '5px' }} />
-        <span>{step.trim()}</span>
-      </div>
-    ))}
-  </div>
-          </div>
+            <StyledStepsBox>
+              <Typography variant="h6" color="black">
+                Steps:
+              </Typography>
+              {recipe.steps.map((step, index) => (
+                <div key={index} style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+                  <input type="checkbox" style={{ marginRight: '5px' }} />
+                  <span>{step.trim()}</span>
+                </div>
+              ))}
+            </StyledStepsBox>
+          </StyledDescriptionIngredientsSteps>
 
-      
+          <StyledReviewsContainer>
+            <Typography variant="h6">Reviews:</Typography>
+            {reviews.map((review) => (
+              <StyledReviewCard key={review._id}>
+                <StyledReviewAuthor>
+                  <StyledReviewAvatar alt={review.author} src="/img/default-avatar.jpg" />
+                  <StyledReviewContent>
+                    <Typography variant="subtitle1">Author: {review.author}</Typography>
+                    <StyledRating value={review.rating} readOnly />
+                  </StyledReviewContent>
+                </StyledReviewAuthor>
+                <StyledReviewComment>
+                  <Typography variant="body2">{review.comment}</Typography>
+                </StyledReviewComment>
+              </StyledReviewCard>
+            ))}
+          </StyledReviewsContainer>
 
+          <StyledRatingCommentContainer>
+            <Typography variant="h6">Rate and Comment:</Typography>
+            <Typography variant="subtitle1">
+              My team and I love hearing from you! Submit your recipe review here.
+            </Typography>
 
-      <div className="reviews-box" style={{ marginTop: '20px' }}>
-  <h3>Reviews:</h3>
-  {reviews.map((review) => (
-    <div key={review._id} className="review-item">
-      <div className="review-header">
-        <h6 className="review-author">Author: {review.author}</h6>
-      </div>
-      <div className="review-rating">
-        <span className="rating-stars">
-          {renderStars(review.rating)}
-        </span>
-      </div>
-      <div className="review-comment">
-        <h6>Comment:</h6>
-        <h6>{review.comment}</h6>
-      </div>
-    </div>
-  ))}
-</div>
-<div className="rating-comment-box" style={{ marginTop: '20px',marginLeft:'500px' }}>
-        <h3>Rate and Comment:</h3>
-        <br />
-        <h6>My team and I love hearing from you! Submit your recipe review here.</h6>
-        <br />
-        <form onSubmit={handleFormSubmit}>
-        <label>
-      Your Name:
-      <input type="text" value={authorName} onChange={handleAuthorNameChange} required />
-    </label>
-    <br />
-          <div className="rating-stars">
-            {[...Array(5)].map((star, index) => {
-              const ratingValue = index + 1;
-
-              return (
-                <label key={index}>
-                  <input
-                    type="radio"
-                    name="rating"
-                    value={ratingValue}
-                    onClick={() => handleRatingClick(ratingValue)}
-                    onMouseEnter={() => handleRatingHover(ratingValue)}
-                    onMouseLeave={() => handleRatingHover(0)}
+            <StyledCommentPaper>
+              <StyledCommentForm onSubmit={handleFormSubmit}>
+                <Box mt={2} mb={2}>
+                  <TextField
+                    label="Your Name"
+                    variant="outlined"
+                    fullWidth
+                    value={authorName}
+                    onChange={handleAuthorNameChange}
+                    required
                   />
-                  <FaStar
-                    className="star"
-                    color={ratingValue <= (hoverRating || rating) ? '#ffc107' : '#e4e5e9'}
-                    size={25}
+                </Box>
+
+                <StyledRatingStarsInput>
+                  {[...Array(5)].map((_, index) => {
+                    const ratingValue = index + 1;
+                    return (
+                      <label key={index}>
+                        <input
+                          type="radio"
+                          name="rating"
+                          value={ratingValue}
+                          onClick={() => handleRatingClick(ratingValue)}
+                          onMouseEnter={() => handleRatingHover(ratingValue)}
+                          onMouseLeave={() => handleRatingHover(0)}
+                        />
+                        <FaStar className="star" color={ratingValue <= (hoverRating || rating) ? '#ffc107' : '#e4e5e9'} />
+                      </label>
+                    );
+                  })}
+                </StyledRatingStarsInput>
+
+                <Box mt={2} mb={2}>
+                  <StyledCommentTextArea
+                    placeholder="Comment"
+                    value={comment}
+                    onChange={handleCommentChange}
                   />
-                </label>
-              );
-            })}
-          </div>
-          <br />
-          <label>
-            Comment:
-            <textarea value={comment} onChange={handleCommentChange}></textarea>
-          </label>
-          <br />
-          
-          <button type="submit">Submit</button>
-        </form>
-      </div>
+                </Box>
 
-
-        </div>
-
-        
-      </div>
-    </div>
+                <StyledSubmitButton type="submit">Submit</StyledSubmitButton>
+              </StyledCommentForm>
+            </StyledCommentPaper>
+          </StyledRatingCommentContainer>
+        </StyledRecipeDetails>
+      </StyledRecipeContainer>
+    </Box>
   );
 };
 
